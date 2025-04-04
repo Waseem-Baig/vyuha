@@ -23,7 +23,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         </div>
 
         {/* 🔗 Core Layout */}
-        <div className="relative z-10 flex flex-col min-h-screen">
+        <div className="relative z-10 flex flex-col">
             {/* Navbar */}
             <header className="w-full">
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">

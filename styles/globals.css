@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:wght@100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+}
+/*body, * {*/
+/*    cursor: none; !* Hide native cursor *!*/
+/*}*/
+.bg-overlay {
+    background: linear-gradient(to right, #2e2e2e, #000);
+}
