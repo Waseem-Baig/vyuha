@@ -1,18 +1,9 @@
 "use client";
-import { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import {
-    Instagram,
-    Linkedin,
-    Youtube,
-    Music, // Replaced Spotify with Music
-    Mic,
-    Monitor, // Replaced Apple with Monitor
-    Star,
-    ArrowRight
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { useRef, useEffect } from "react";
 
-const SocialMedia = () => {
+const CTA = () => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -104,11 +95,9 @@ const SocialMedia = () => {
             {/* Grid pattern overlay */}
             <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10 z-[2]" />
 
-            <div className="max-w-6xl mx-auto px-8 relative z-10">
-
-                {/* Podcast Section */}
+            <div className="max-w-5xl mx-auto px-8 relative z-10">
                 <motion.div
-                    className="bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/30 rounded-2xl overflow-hidden backdrop-blur-sm max-w-3xl mx-auto"
+                    className="bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/30 rounded-2xl overflow-hidden backdrop-blur-sm"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
@@ -118,83 +107,76 @@ const SocialMedia = () => {
                         borderColor: "rgba(249, 115, 22, 0.4)"
                     }}
                 >
-                    <div className="p-10 md:p-12">
+                    <div className="p-10 md:p-14">
                         <motion.div
-                            className="mb-6 bg-orange-500/20 h-16 w-16 rounded-full flex items-center justify-center mx-auto border border-orange-500/30"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                        >
-                            <Mic className="h-8 w-8 text-orange-400" />
-                        </motion.div>
-
-                        <motion.h3
-                            className="text-2xl sm:text-3xl font-bold text-white mb-3 font-outfit text-center"
+                            className="text-center"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.5 }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
                         >
-                            🎙 Vyuha Talks — Coming Soon
-                        </motion.h3>
-
-                        <motion.p
-                            className="text-gray-300 mb-8 text-center font-outfit"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.6 }}
-                        >
-                            Explore student journeys, mentor insights, and breakthrough stories through our upcoming podcast.
-                        </motion.p>
-
-                        <motion.div
-                            className="flex justify-center gap-8 text-white"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.7 }}
-                        >
-                            {[
-                                { icon: <Music className="h-6 w-6" />, color: "hover:text-green-500" },
-                                { icon: <Monitor className="h-6 w-6" />, color: "hover:text-gray-300" },
-                                { icon: <Youtube className="h-6 w-6" />, color: "hover:text-red-500" }
-                            ].map((platform, index) => (
-                                <motion.div
-                                    key={index}
-                                    className={`cursor-pointer ${platform.color} transition-colors duration-300`}
-                                    whileHover={{ scale: 1.2 }}
-                                    whileTap={{ scale: 0.9 }}
-                                >
-                                    {platform.icon}
-                                </motion.div>
-                            ))}
-                        </motion.div>
-
-                        <motion.div
-                            className="mt-8 text-center"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.8 }}
-                        >
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors font-medium font-outfit mx-auto group"
+                            <motion.h2
+                                className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight font-outfit bg-clip-text text-transparent bg-gradient-to-r from-white to-orange-200"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
                             >
-                                Get notified on launch
-                                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                            </motion.button>
+                                Ready to <span className="text-white/90">Transform</span> Your Ideas?
+                            </motion.h2>
+
+                            <motion.p
+                                className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto font-outfit"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.3 }}
+                            >
+                                Join Vyuha to connect with innovators, gain skills, and make an impact.
+                                Together, we can build solutions that matter.
+                            </motion.p>
+
+                            <motion.div
+                                className="mt-10 flex flex-wrap justify-center gap-5"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                            >
+                                <motion.button
+                                    whileHover={{ scale: 1.05, boxShadow: "0 0 15px 2px rgba(249, 115, 22, 0.4)" }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-3 rounded-full font-medium font-outfit transition-all duration-300 shadow-lg shadow-orange-500/20 group"
+                                >
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        Join Our Community
+                                        <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                                    </span>
+                                    <motion.span
+                                        className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700"
+                                        initial={{ x: "100%" }}
+                                        whileHover={{ x: 0 }}
+                                        transition={{ type: "spring", stiffness: 100 }}
+                                    />
+                                </motion.button>
+
+                                <motion.button
+                                    whileHover={{ scale: 1.05, borderColor: "rgba(249, 115, 22, 0.8)" }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="bg-white/5 backdrop-blur-sm border border-white/20 text-white px-8 py-3 rounded-full font-medium font-outfit transition-all duration-300 group"
+                                >
+                                    <span className="flex items-center gap-2">
+                                        Contact Us
+                                        <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                                    </span>
+                                </motion.button>
+                            </motion.div>
                         </motion.div>
                     </div>
                 </motion.div>
-
             </div>
         </section>
     );
 };
 
-export default SocialMedia;
+export default CTA;
