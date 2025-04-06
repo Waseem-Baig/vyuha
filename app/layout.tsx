@@ -32,8 +32,8 @@ export default function Layout({ children }: { children: ReactNode }) {
             </header>
 
             {/* Page Content */}
-            <main className="flex-1 w-full max-w-8xl mx-auto sm:px-10 pt-16 md:pt-10">
-                {children}
+            <main className="flex-1 w-full max-w-7xl mx-auto sm:px-10 pt-16 md:pt-10">
+            {children}
             </main>
 
             {/* Footer */}
