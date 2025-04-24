@@ -10,10 +10,11 @@ import { usePathname, useRouter } from "next/navigation";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Our Portfolio", href: "/portfolio" },
-  { name: "Connect and Challenge", href: "/challenge" },
-  { name: "Our Clubs and Courses", href: "/clubs" },
+  { name: "Our Portfolio", href: "/origin" },
+  { name: "Connect and Challenge", href: "/club-partner" },
+  { name: "Podcast Connect", href: "/podcast-partner" },
   { name: "Membership", href: "/membership" },
+  { name: "Organization", href: "/organization" },
 ];
 
 export default function Navbar() {
@@ -93,6 +94,16 @@ export default function Navbar() {
             VYUHA
           </motion.span>
         </Link>
+
+        {/* Hamburger Menu for Mobile */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-white focus:outline-none"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-6">
@@ -194,6 +205,42 @@ export default function Navbar() {
             </>
           )}
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="absolute top-full left-0 w-full bg-[#0c0c0ccc] border-t border-white/10 rounded-b-lg shadow-lg md:hidden"
+            >
+              <div className="flex flex-col space-y-4 p-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`text-sm font-medium transition-all duration-200 ${
+                      pathname === link.href ? "text-orange-400" : "text-white"
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                {isLoggedIn && (
+                  <button
+                    onClick={handleLogout}
+                    className="text-sm font-medium text-white hover:text-orange-400 transition-all"
+                  >
+                    Logout
+                  </button>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.nav>
   );
