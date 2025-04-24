@@ -42,7 +42,7 @@ export default function PodcastPartnerForm() {
                   type="text"
                   id="number"
                   name="number"
-                  placeholder="Your last name"
+                  placeholder="Your number"
                   className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
                 />
               </div>

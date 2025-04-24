@@ -6,7 +6,7 @@ import { mentors } from "@/data/mentors";
 
 export default function PathPreview() {
   return (
-    <main className="min-h-screen bg-gray-900 text-white">
+    <main className="min-h-screen text-white">
       {/* Preview Video Section */}
       <section className="py-12 px-4 md:py-16 md:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center">
