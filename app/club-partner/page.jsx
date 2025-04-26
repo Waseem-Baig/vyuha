@@ -45,6 +45,18 @@ export default function ClubPartnerForms() {
                   />
                 </div>
                 <div>
+                  <label htmlFor="name" className="block text-md font-medium">
+                    Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    id="personal-phone"
+                    name="phone"
+                    placeholder="Your number"
+                    className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                  />
+                </div>
+                <div>
                   <label htmlFor="skills" className="block text-md font-medium">
                     Skills/Expertise
                   </label>
@@ -135,6 +147,18 @@ export default function ClubPartnerForms() {
                   />
                 </div>
                 <div>
+                  <label htmlFor="name" className="block text-md font-medium">
+                    Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    id="club-phone"
+                    name="phone"
+                    placeholder="Your number"
+                    className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                  />
+                </div>
+                <div>
                   <label htmlFor="vision" className="block text-md font-medium">
                     Vision for the Club
                   </label>
@@ -197,6 +221,18 @@ export default function ClubPartnerForms() {
                     id="college-name"
                     name="college-name"
                     placeholder="Your college name"
+                    className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="name" className="block text-md font-medium">
+                    Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    id="club2-phone"
+                    name="phone"
+                    placeholder="Your number"
                     className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
                   />
                 </div>
