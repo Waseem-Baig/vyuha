@@ -41,7 +41,7 @@ export default function PathPreview() {
       </section>
 
       {/* Embedded Calendly Section */}
-      <section className="py-12 px-4 md:py-16 md:px-6 lg:px-8 bg-gray-800 text-white">
+      <section className="py-12 px-4 md:py-16 md:px-6 lg:px-8 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-6">
             Book a Counseling Session
@@ -63,7 +63,7 @@ export default function PathPreview() {
       </section>
 
       {/* Intro Video Section */}
-      <section className="py-12 px-4 md:py-16 md:px-6 lg:px-8 bg-gray-900 text-white">
+      <section className="py-12 px-4 md:py-16 md:px-6 lg:px-8 text-white">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-6">
             What to Expect from Counseling
@@ -88,7 +88,7 @@ export default function PathPreview() {
       </section>
 
       {/* Mentor Bio Cards Section */}
-      <section className="py-12 px-4 md:py-16 md:px-6 lg:px-8 bg-gray-800 text-white">
+      <section className="py-12 px-4 md:py-16 md:px-6 lg:px-8 text-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
             Meet Our Mentors
@@ -97,7 +97,7 @@ export default function PathPreview() {
             {mentors.map((mentor) => (
               <div
                 key={mentor.name}
-                className="p-6 bg-gray-900 rounded-lg shadow-lg hover:shadow-orange-500 transition-shadow duration-300"
+                className="p-6 bg-black/90 text-white rounded-lg shadow-lg hover:shadow-orange-500 transition-shadow duration-300"
               >
                 <img
                   src={mentor.photo}

@@ -1,0 +1,32 @@
+export const mentors = [
+  {
+    id: 1,
+    name: "John Doe",
+    photo: "/mentor1.jpg",
+    skills: ["Programming", "AI", "Machine Learning"],
+    industry: "Tech",
+    experience: "10+ years in software development and AI research.",
+    mentorshipStyle: "Goal-oriented and hands-on.",
+    availability: "Weekends",
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    photo: "/mentor2.jpg",
+    skills: ["Design", "UI/UX", "Branding"],
+    industry: "Design",
+    experience: "8+ years in creative design and branding.",
+    mentorshipStyle: "Supportive and collaborative.",
+    availability: "Available this week",
+  },
+  {
+    id: 3,
+    name: "Michael Johnson",
+    photo: "/mentor3.jpg",
+    skills: ["Marketing", "SEO", "Content Strategy"],
+    industry: "Marketing",
+    experience: "12+ years in digital marketing and SEO.",
+    mentorshipStyle: "Strategic and data-driven.",
+    availability: "Anytime",
+  },
+];

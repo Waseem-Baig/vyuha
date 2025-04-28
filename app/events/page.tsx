@@ -27,70 +27,25 @@ import {
   Upload,
   Search,
   Filter,
+  UsersIcon,
+  BriefcaseIcon,
 } from "lucide-react";
 import Link from "next/link";
-
-type Event = {
-  id: number;
-  name: string;
-  logo: string;
-  date: string;
-  time: string;
-  location: string;
-  description: string;
-  category: string;
-  mode?: string;
-};
+import { events as hardcodedEvents, Event } from "@/data/eventData"; // Import events from eventData.ts
+import React from "react";
 
 export default function EventsPage() {
   const [date, setDate] = useState<Date>();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [modeFilter, setModeFilter] = useState("");
-
+  const [targetAudienceFilter, setTargetAudienceFilter] = useState("");
   const [events, setEvents] = useState<Event[]>([]);
 
   // Fetch events from localStorage and merge with hardcoded events
   useEffect(() => {
     const storedEvents = JSON.parse(localStorage.getItem("events") || "[]");
-    const featuredEvents = [
-      {
-        id: 1,
-        name: "Tech Innovation Summit 2024",
-        logo: "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg",
-        date: "2024-04-15",
-        time: "10:00 AM",
-        location: "Virtual Event",
-        description:
-          "Join us for a day of cutting-edge technology discussions and networking.",
-        category: "Tech",
-      },
-      {
-        id: 2,
-        name: "Cultural Fest Extravaganza",
-        logo: "https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg",
-        date: "2024-04-20",
-        time: "11:00 AM",
-        location: "Mumbai, India",
-        description:
-          "Experience the vibrant diversity of Indian culture through performances and exhibitions.",
-        category: "Cultural",
-      },
-      {
-        id: 3,
-        name: "Leadership Workshop Series",
-        logo: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
-        date: "2024-04-25",
-        time: "2:00 PM",
-        location: "Bangalore, India",
-        description:
-          "Develop essential leadership skills through interactive sessions.",
-        category: "Leadership",
-      },
-    ];
-
-    // Merge stored events with hardcoded events
-    setEvents([...storedEvents, ...featuredEvents]);
+    setEvents([...storedEvents, ...hardcodedEvents]);
   }, []);
 
   const pastEvents = [
@@ -137,7 +92,17 @@ export default function EventsPage() {
       ? format(new Date(event.date), "yyyy-MM-dd") ===
         format(date, "yyyy-MM-dd")
       : true;
-    return matchesSearch && matchesCategory && matchesMode && matchesDate;
+    const matchesAudience = targetAudienceFilter
+      ? event.targetAudience === targetAudienceFilter
+      : true;
+
+    return (
+      matchesSearch &&
+      matchesCategory &&
+      matchesMode &&
+      matchesDate &&
+      matchesAudience
+    );
   });
 
   return (
@@ -191,6 +156,17 @@ export default function EventsPage() {
                 <SelectItem value="Cultural">Cultural</SelectItem>
                 <SelectItem value="Social">Social</SelectItem>
                 <SelectItem value="Leadership">Leadership</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select onValueChange={(value) => setTargetAudienceFilter(value)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Target Audience" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Students">Students</SelectItem>
+                <SelectItem value="EveryOne">EveryOne</SelectItem>
+                <SelectItem value="Professionals">Professionals</SelectItem>
               </SelectContent>
             </Select>
 
@@ -262,7 +238,15 @@ export default function EventsPage() {
                     </div>
                     <CardHeader>
                       <CardTitle className="text-xl font-bold">
-                        {event.name}
+                        <div className="flex items-center gap-2">
+                          {event.icon &&
+                            React.createElement(event.icon, {
+                              className: "w-6 h-6 text-orange-500",
+                            })}
+                          <CardTitle className="text-xl font-bold">
+                            {event.name}
+                          </CardTitle>
+                        </div>{" "}
                       </CardTitle>
                       <div className="flex flex-col gap-2 text-sm text-gray-400">
                         <div className="flex items-center gap-2">
@@ -281,9 +265,18 @@ export default function EventsPage() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-gray-400 mb-4">{event.description}</p>
-                      <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white transition-transform duration-300 hover:scale-105">
-                        Join Event
-                      </Button>
+                      <div className="flex gap-4">
+                        <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white transition-transform duration-300 hover:scale-105">
+                          Join Event
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="w-full text-orange-500 border-orange-500 hover:bg-orange-500 hover:text-white transition-transform duration-300 hover:scale-105"
+                          asChild
+                        >
+                          <Link href={`/events/${event.id}`}>Learn More</Link>
+                        </Button>
+                      </div>
                     </CardContent>
                   </Card>
                 </motion.div>

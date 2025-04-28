@@ -28,6 +28,7 @@ import {
   EyeOff,
   ArrowRight,
 } from "lucide-react";
+import axios from "axios";
 
 const formSchema = z
   .object({
@@ -59,26 +60,58 @@ export default function SignUpPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      terms: false,
+      fullName: "", // Default value for fullName
+      email: "", // Default value for email
+      password: "", // Default value for password
+      confirmPassword: "", // Default value for confirmPassword
+      terms: false, // Default value for terms
     },
   });
 
+  // const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  //   setIsSubmitting(true);
+  //   try {
+  //     // Use the API URL from the environment variable
+  //     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  //     // Make API call to the signup endpoint
+  //     const response = await axios.post(`${apiUrl}/api/auth/signup`, {
+  //       username: values.fullName,
+  //       email: values.email,
+  //       password: values.password,
+  //     });
+
+  //     if (response.status === 201) {
+  //       const { token, user } = response.data;
+
+  //       // Store the token in sessionStorage or localStorage
+  //       sessionStorage.setItem("authToken", token);
+
+  //       alert(
+  //         "Account created successfully! Redirecting to the sign-in page..."
+  //       );
+  //       router.push("/auth/sign-in"); // Navigate to the sign-in page
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during sign-up:", error);
+
+  //     // Handle specific error messages from the API
+  //     if (axios.isAxiosError(error) && error.response) {
+  //       alert(
+  //         error.response.data.message || "An error occurred. Please try again."
+  //       );
+  //     } else {
+  //       alert("An error occurred. Please try again later.");
+  //     }
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    try {
-      console.log(values);
-
-      // Store user details in session storage
-      sessionStorage.setItem("userDetails", JSON.stringify(values));
-
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
-      alert("Account created successfully! Please sign in."); // Show success alert
-      router.push("/auth/sign-in"); // Navigate to the sign-in page
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    console.log("Form submitted:", values); // Log the form values
+    router.push("/auth/sign-in"); // Navigate to the sign-in page
   };
 
   return (

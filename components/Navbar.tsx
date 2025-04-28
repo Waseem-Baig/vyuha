@@ -3,7 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Menu, X, User } from "lucide-react";
+import {
+  Menu,
+  X,
+  User,
+  Bell,
+  Settings,
+  ChevronDown,
+  LogOut,
+} from "lucide-react"; // Added Bell and Settings icons
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "/public/logo.png";
 import { usePathname, useRouter } from "next/navigation";
@@ -11,10 +19,19 @@ import { usePathname, useRouter } from "next/navigation";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Our Portfolio", href: "/origin" },
-  { name: "Connect and Challenge", href: "/club-partner" },
-  { name: "Podcast Connect", href: "/podcast-partner" },
+
   { name: "Membership", href: "/membership" },
   { name: "Organization", href: "/organization" },
+  { name: "Events", href: "/events" }, // Added Events
+  { name: "Contact", href: "/contact" }, // Added Contact
+];
+
+const connectLinks = [
+  { name: "Connect and Challenge", href: "/club-partner" },
+  { name: "Podcast Connect", href: "/podcast-partner" },
+  { name: "Path", href: "/path" },
+  { name: "path-preview", href: "/path-preview" },
+  { name: "organizations", href: "/organizations" },
 ];
 
 export default function Navbar() {
@@ -22,6 +39,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
   const [showProfileMenu, setShowProfileMenu] = useState(false); // State for profile dropdown
+  const [showConnectMenu, setShowConnectMenu] = useState(false); // State for Connect dropdown
   const pathname = usePathname();
   const router = useRouter();
 
@@ -36,8 +54,8 @@ export default function Navbar() {
   // Check login status on the client side
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedUserDetails = sessionStorage.getItem("userDetails");
-      setIsLoggedIn(!!storedUserDetails); // Set to true if user details exist
+      const authToken = sessionStorage.getItem("authToken");
+      setIsLoggedIn(!!authToken); // Set to true if authToken exists
     }
   }, []);
 
@@ -48,7 +66,7 @@ export default function Navbar() {
 
   // Handle Logout
   const handleLogout = () => {
-    sessionStorage.removeItem("userDetails"); // Clear session storage
+    sessionStorage.removeItem("authToken"); // Clear session storage
     setIsLoggedIn(false); // Update login state
     router.push("/auth/sign-in"); // Navigate to sign-in page
   };
@@ -135,6 +153,40 @@ export default function Navbar() {
                 );
               })}
 
+              <div
+                className="relative"
+                onMouseEnter={() => setShowConnectMenu(true)}
+                onMouseLeave={() => setShowConnectMenu(false)}
+              >
+                <button className="flex items-center space-x-2 text-sm font-medium text-white transition-all">
+                  <span>Connect</span>
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+
+                {/* Dropdown Menu */}
+                <AnimatePresence>
+                  {showConnectMenu && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 mt-2 w-48 bg-[#0c0c0ccc] border border-white/10 rounded-lg shadow-lg overflow-hidden"
+                    >
+                      {connectLinks.map((link) => (
+                        <Link
+                          key={link.name}
+                          href={link.href}
+                          className="block px-4 py-2 text-sm text-white hover:bg-orange-500/20 transition-all"
+                        >
+                          {link.name}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               {/* Profile Button */}
               <div className="relative">
                 <button
@@ -160,13 +212,31 @@ export default function Navbar() {
                         className="block px-4 py-2 text-sm text-white hover:bg-orange-500/20 transition-all"
                         onClick={() => setShowProfileMenu(false)}
                       >
-                        Profile
+                        <User className="inline w-4 h-4 mr-2" />
+                        <span>Profile</span>
+                      </Link>
+                      <Link
+                        href="/profile/settings"
+                        className="block px-4 py-2 text-sm text-white hover:bg-orange-500/20 transition-all"
+                        onClick={() => setShowProfileMenu(false)}
+                      >
+                        <Settings className="inline w-4 h-4 mr-2" />
+                        Settings
+                      </Link>
+                      <Link
+                        href="/profile/notifications"
+                        className="block px-4 py-2 text-sm text-white hover:bg-orange-500/20 transition-all"
+                        onClick={() => setShowProfileMenu(false)}
+                      >
+                        <Bell className="inline w-4 h-4 mr-2" />
+                        Notifications
                       </Link>
                       <button
                         onClick={handleLogout}
                         className="w-full text-left px-4 py-2 text-sm text-white hover:bg-orange-500/20 transition-all"
                       >
-                        Logout
+                        <LogOut className="inline w-4 h-4 mr-2" />
+                        <span>Logout</span>
                       </button>
                     </motion.div>
                   )}
@@ -217,25 +287,46 @@ export default function Navbar() {
               className="absolute top-full left-0 w-full bg-[#0c0c0ccc] border-t border-white/10 rounded-b-lg shadow-lg md:hidden"
             >
               <div className="flex flex-col space-y-4 p-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={`text-sm font-medium transition-all duration-200 ${
-                      pathname === link.href ? "text-orange-400" : "text-white"
-                    }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-                {isLoggedIn && (
+                {isLoggedIn
+                  ? navLinks.map((link) => (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        className={`text-sm font-medium transition-all duration-200 ${
+                          pathname === link.href
+                            ? "text-orange-400"
+                            : "text-white"
+                        }`}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {link.name}
+                      </Link>
+                    ))
+                  : null}
+                {isLoggedIn ? (
                   <button
                     onClick={handleLogout}
                     className="text-sm font-medium text-white hover:text-orange-400 transition-all"
                   >
                     Logout
                   </button>
+                ) : (
+                  <>
+                    <Link
+                      href="/auth/sign-in"
+                      className="text-sm font-medium text-white hover:text-orange-400 transition-all"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      href="/auth/sign-up"
+                      className="text-sm font-medium text-white hover:text-orange-400 transition-all"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Sign Up
+                    </Link>
+                  </>
                 )}
               </div>
             </motion.div>

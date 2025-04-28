@@ -10,7 +10,14 @@ interface FormData {
   time: string;
   location: string;
   category: string;
+  mode: string;
+  targetAudience: string;
   description: string;
+  fees: string;
+  materials: string;
+  platformLink: string;
+  organizer: string;
+  organizerBio: string;
   logo: File | null;
 }
 
@@ -21,7 +28,14 @@ export default function CreateEventPage() {
     time: "",
     location: "",
     category: "",
+    mode: "",
+    targetAudience: "",
     description: "",
+    fees: "",
+    materials: "",
+    platformLink: "",
+    organizer: "",
+    organizerBio: "",
     logo: null,
   });
 
@@ -153,6 +167,50 @@ export default function CreateEventPage() {
                 </select>
               </div>
 
+              {/* Event Mode */}
+              <div>
+                <label htmlFor="mode" className="block text-md font-medium">
+                  Event Mode
+                </label>
+                <select
+                  id="mode"
+                  name="mode"
+                  value={formData.mode}
+                  onChange={handleInputChange}
+                  className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                >
+                  <option value="" disabled>
+                    Select a mode
+                  </option>
+                  <option value="online">Online</option>
+                  <option value="offline">Offline</option>
+                </select>
+              </div>
+
+              {/* Target Audience */}
+              <div>
+                <label
+                  htmlFor="targetAudience"
+                  className="block text-md font-medium"
+                >
+                  Target Audience
+                </label>
+                <select
+                  id="targetAudience"
+                  name="targetAudience"
+                  value={formData.targetAudience}
+                  onChange={handleInputChange}
+                  className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                >
+                  <option value="" disabled>
+                    Select target audience
+                  </option>
+                  <option value="Students">Students</option>
+                  <option value="Professionals">Professionals</option>
+                  <option value="Everyone">Everyone</option>
+                </select>
+              </div>
+
               {/* Event Description */}
               <div>
                 <label
@@ -168,6 +226,98 @@ export default function CreateEventPage() {
                   onChange={handleInputChange}
                   placeholder="Enter event description"
                   rows={4}
+                  className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                ></textarea>
+              </div>
+
+              {/* Event Fees */}
+              <div>
+                <label htmlFor="fees" className="block text-md font-medium">
+                  Event Fees
+                </label>
+                <input
+                  type="text"
+                  id="fees"
+                  name="fees"
+                  value={formData.fees}
+                  onChange={handleInputChange}
+                  placeholder="Enter event fees (e.g., Free, $50)"
+                  className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                />
+              </div>
+
+              {/* Required Materials */}
+              <div>
+                <label
+                  htmlFor="materials"
+                  className="block text-md font-medium"
+                >
+                  Required Materials
+                </label>
+                <input
+                  type="text"
+                  id="materials"
+                  name="materials"
+                  value={formData.materials}
+                  onChange={handleInputChange}
+                  placeholder="Enter required materials (e.g., Laptop)"
+                  className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                />
+              </div>
+
+              {/* Platform Link */}
+              <div>
+                <label
+                  htmlFor="platformLink"
+                  className="block text-md font-medium"
+                >
+                  Platform Link
+                </label>
+                <input
+                  type="text"
+                  id="platformLink"
+                  name="platformLink"
+                  value={formData.platformLink}
+                  onChange={handleInputChange}
+                  placeholder="Enter platform link (e.g., Zoom, Google Meet)"
+                  className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                />
+              </div>
+
+              {/* Organizer Name */}
+              <div>
+                <label
+                  htmlFor="organizer"
+                  className="block text-md font-medium"
+                >
+                  Organizer Name
+                </label>
+                <input
+                  type="text"
+                  id="organizer"
+                  name="organizer"
+                  value={formData.organizer}
+                  onChange={handleInputChange}
+                  placeholder="Enter organizer name"
+                  className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+                />
+              </div>
+
+              {/* Organizer Bio */}
+              <div>
+                <label
+                  htmlFor="organizerBio"
+                  className="block text-md font-medium"
+                >
+                  Organizer Bio
+                </label>
+                <textarea
+                  id="organizerBio"
+                  name="organizerBio"
+                  value={formData.organizerBio}
+                  onChange={handleInputChange}
+                  placeholder="Enter organizer bio"
+                  rows={3}
                   className="w-full mt-2 p-3 bg-black border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
                 ></textarea>
               </div>
