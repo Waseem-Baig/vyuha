@@ -37,7 +37,7 @@ const connectLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // State to track login status
   const [showProfileMenu, setShowProfileMenu] = useState(false); // State for profile dropdown
   const [showConnectMenu, setShowConnectMenu] = useState(false); // State for Connect dropdown
   const pathname = usePathname();
@@ -51,13 +51,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Check login status on the client side
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const authToken = sessionStorage.getItem("authToken");
-      setIsLoggedIn(!!authToken); // Set to true if authToken exists
-    }
-  }, []);
+  // // Check login status on the client side
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const authToken = sessionStorage.getItem("authToken");
+  //     setIsLoggedIn(!!authToken); // Set to true if authToken exists
+  //   }
+  // }, []);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function Navbar() {
   // Handle Logout
   const handleLogout = () => {
     sessionStorage.removeItem("authToken"); // Clear session storage
-    setIsLoggedIn(false); // Update login state
+    // setIsLoggedIn(false); // Update login state
     router.push("/auth/sign-in"); // Navigate to sign-in page
   };
 
