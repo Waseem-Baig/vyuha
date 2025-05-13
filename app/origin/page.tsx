@@ -7,13 +7,36 @@ export default function InitiativesPage() {
   return (
     <main className="min-h-screen text-white mt-10 md:mt-24">
       {/* Hero Section */}
-      <section className="relative flex items-center justify-between h-auto px-4">
+      <section className="relative flex flex-col md:flex-row items-center justify-between h-auto px-4 space-y-6 md:space-y-0">
+        {/* Right Content (Logo) */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+          className="relative flex flex-col items-center space-y-6 group md:order-2"
+        >
+          {/* Image */}
+          <img
+            src="/logo.png"
+            alt="Vyuha Initiatives"
+            className="w-full max-w-md rounded-lg shadow-lg"
+          />
+
+          {/* Overlay Content */}
+          <div className="absolute bottom-0 left-0 w-full bg-orange-500/80 rounded-b-lg py-4 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p className="text-2xl font-bold text-white">300+ Events</p>
+            <p className="text-2xl font-bold text-white">
+              10,000 Students Engaged
+            </p>
+          </div>
+        </motion.div>
+
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
-          className="max-w-lg space-y-3"
+          className="max-w-lg space-y-3 md:order-1"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-orange-400">
             Initiatives from Vyuha
@@ -39,29 +62,6 @@ export default function InitiativesPage() {
           <button className="mt-6 px-6 py-3 bg-transparent border border-white hover:bg-orange-500 text-orange-500 font-semibold rounded-lg shadow-md hover:text-white hover:scale-105 transition-all duration-300 ease-in-out hover:border-transparent">
             Know More
           </button>
-        </motion.div>
-
-        {/* Right Content */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="relative flex flex-col items-center space-y-6 group"
-        >
-          {/* Image */}
-          <img
-            src="/logo.png"
-            alt="Vyuha Initiatives"
-            className="w-full max-w-md rounded-lg shadow-lg"
-          />
-
-          {/* Overlay Content */}
-          <div className="absolute bottom-0 left-0 w-full bg-orange-500/80 rounded-b-lg py-4 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <p className="text-2xl font-bold text-white">300+ Events</p>
-            <p className="text-2xl font-bold text-white">
-              10,000 Students Engaged
-            </p>
-          </div>
         </motion.div>
       </section>
 
